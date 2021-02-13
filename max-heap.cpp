@@ -17,5 +17,5 @@ int main()
 		pq.pop();
 		k--;
 	}
-	cout<<pq.top();
+	cout<<"k-th smallest element "<<pq.top();
 } 
