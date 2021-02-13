@@ -1,39 +1,38 @@
 #include <bits/stdc++.h> 
 using namespace std; 
+int arr[] = { 12, 3, 5, 7, 4, 19, 26 }; 
+int n = sizeof(arr) / sizeof(arr[0]); 
 
-void swap(int* a, int* b) 
+int partition(int arr[], int start, int end) 
 { 
-	int temp = *a; 
-	*a = *b; 
-	*b = temp; 
+	 int pivot = arr[end];
+    int pIndex = start;
+    for (int i = start; i < end; i++)
+    {
+        if (arr[i] >= pivot) //reverse the comparision sign for kth largest element
+        {                  //i.e, if(a[i] >= pivot)
+            swap(arr[pIndex], arr[i]);
+            pIndex++;
+        }
+    }
+    swap(arr[pIndex], arr[end]);
+    return pIndex;
 } 
 
-int partition(int arr[], int left, int right) 
+int kthSmallest(int arr[], int start, int end, int k) 
 { 
-	int x = arr[right], i = left; 
-	for (int j = left; j <= right - 1; j++) { 
-		if (arr[j] <= x) { 
-			swap(&arr[i], &arr[j]); 
-			i++; 
-		} 
-	} 
-	swap(&arr[i], &arr[right]); 
-	return i; 
-} 
-
-int kthSmallest(int arr[], int left, int right, int k) 
-{ 
-	if (k > 0 && k <= right - left + 1) 
+	if (k > 0 && k<=n && start<=end ) 
     { 
 
-		int pos = partition(arr, left, right); 
-
-		if (pos - left == k - 1) 
+		int pos = partition(arr, start, end); 
+		if (pos == k-1)
 			return arr[pos]; 
-		if (pos - left > k - 1)  
-			return kthSmallest(arr, left, pos - 1, k); 
+		if (pos-1 == k-1)
+			return arr[pos-1]; 
+		if (pos> k)  
+			return kthSmallest(arr, start, pos - 1, k); 
 
-		return kthSmallest(arr, pos + 1, right, k - pos + left - 1); 
+		return kthSmallest(arr, pos + 1, end, k); 
 	} 
 
 	// If k is more than number of elements in array 
@@ -41,9 +40,8 @@ int kthSmallest(int arr[], int left, int right, int k)
 } 
 
 int main() 
-{ 
-	int arr[] = { 12, 3, 5, 7, 4, 19, 26 }; 
-	int n = sizeof(arr) / sizeof(arr[0]), k = 3; 
-	cout << "K'th smallest element is " << kthSmallest(arr, 0, n - 1, k); 
+{
+	int k=3;
+	cout <<"k-th smallest element is " << kthSmallest(arr, 0, n - 1, k); 
 	return 0; 
 } 
