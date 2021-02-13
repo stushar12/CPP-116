@@ -6,7 +6,7 @@ int n = sizeof(arr) / sizeof(arr[0]);
 
 int main() 
 {
-	priority_queue <int, vector<int>, greater<int> > pq;				//max-heap
+	priority_queue <int> pq;				//max-heap
 	for(int i=0;i<n;i++)
 	{
 		pq.push(arr[i]);
@@ -17,5 +17,5 @@ int main()
 		pq.pop();
 		k--;
 	}
-	cout<<"k-th smallest element "<<pq.top();
+	cout<<"k-th largest element "<<pq.top();
 } 
