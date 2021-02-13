@@ -9,7 +9,7 @@ int partition(int arr[], int start, int end)
     int pIndex = start;
     for (int i = start; i < end; i++)
     {
-        if (arr[i] >= pivot) //reverse the comparision sign for kth largest element
+        if (arr[i] <= pivot) //reverse the comparision sign for kth largest element
         {                  //i.e, if(a[i] >= pivot)
             swap(arr[pIndex], arr[i]);
             pIndex++;
